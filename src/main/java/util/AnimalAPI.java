@@ -14,10 +14,23 @@ import data.animal.AnimalResponseResult;
 public class AnimalAPI {
 	
 	// OPEN API 연동해서 데이터 받아와서 파싱해서 컨트롤러로 이동
-	public static AnimalResponse getAnimals() {
+	public synchronized static AnimalResponse getAnimals(String upkind, String upr_cd, String pageNo) {
 		try {
 			String target = "http://apis.data.go.kr/1543061/abandonmentPublicSrvc/abandonmentPublic";
-			String queryString = "?serviceKey=IW2U%2FqUpMRhESj1g0MEVFRu%2BSXW5ysrBX%2FBASDOXsa%2FU8uzSE%2B5%2FWqzS3J30O5DcSJPTw0E%2FaykJb9cwz5eyww%3D%3D&_type=json";
+			String queryString= "?serviceKey=IW2U%2FqUpMRhESj1g0MEVFRu%2BSXW5ysrBX%2FBASDOXsa%2FU8uzSE%2B5%2FWqzS3J30O5DcSJPTw0E%2FaykJb9cwz5eyww%3D%3D&_type=json";
+			
+			// 페이징 처리시 필요한 데이터
+			queryString = queryString + "&numOfRows=10&pageNo=" + pageNo;
+			
+			// 품종 선택시 필요한 데이터
+			if(upkind != null) {
+				queryString = queryString + "&upkind=" + upkind; 
+			}
+			
+			// 도시 선택시 필요한 데이터
+			if(upr_cd != null) {
+				queryString = queryString + "&upr_cd=" + upr_cd;
+			}
 			URI uri = new URI(target+queryString);
 			
 			// HttpRequest 객체를 활용하는 방식
