@@ -27,10 +27,10 @@ public class IndexController extends HttpServlet {
 		String upr_cd = req.getParameter("upr_cd");
 		
 		int p;
-		if(req.getParameter("page") == null) {
+		if(req.getParameter("pageNo") == null) {
 			p = 1;
 		}else {
-			p = Integer.parseInt(req.getParameter("page"));
+			p = Integer.parseInt(req.getParameter("pageNo"));
 		}
 		
 		String pageNo = p + ""; 
@@ -69,6 +69,9 @@ public class IndexController extends HttpServlet {
 		{
 			existNext = false;
 		}
+		
+		req.setAttribute("existPrev", existPrev);
+		req.setAttribute("existNext", existNext);
 		
 		req.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(req, resp);
 	}
