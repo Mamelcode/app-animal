@@ -43,7 +43,7 @@
 			</div>
 		<div class="show_main">
 		<c:forEach items="${datas}" var="one">
-				<div class="show_box">
+				<div class="show_box" onclick="location.href='/detail?no=${one.desertionNo}'">
 					<div class="show_img">
 						<img src="${one.filename}">
 					</div>
@@ -62,14 +62,15 @@
 	<c:set var="upkindStatus" value="${empty param.upkind ? null : param.upkind }" />
 	<c:set var="currentPage" value="${empty param.pageNo ? 1: param.pageNo }"/>
 	<c:set var="bgndeStatus" value="${empty param.bgnde ? null : param.bgnde }"/>
-	<c:set var="bgndeStatus" value="${empty param.bgnde ? null : param.bgnde }"/>
+	<c:set var="enddeStatus" value="${empty param.endde ? null : param.endde }"/>
 	
 	<%-- prev 처리 --%>
 	<div class="page">
 		<div class="page_prev">
 			<c:choose>
 				<c:when test="${existPrev }">
-				<a href="index?pageNo=${start - 1}&upkind=${upkindStatus}&upr_cd=${upr_cdStatus}">
+				<a href="index?pageNo=${start - 1}&upkind=${upkindStatus}
+				&upr_cd=${upr_cdStatus}&bgnde=${bgndeStatus}&endde=${enddeStatus}">
 				<i style="color: black" class="fa-solid fa-angle-left"></i></a>
 				</c:when>
 				<c:otherwise>
@@ -86,7 +87,8 @@
 						<a style="color: red;">${idx }</a>
 					</c:when>
 					<c:otherwise>
-						<a href="index?pageNo=${idx}&upkind=${upkindStatus}&upr_cd=${upr_cdStatus}">${idx }</a>
+						<a href="index?pageNo=${idx}&upkind=${upkindStatus}
+						&upr_cd=${upr_cdStatus}&bgnde=${bgndeStatus}&endde=${enddeStatus}">${idx }</a>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
@@ -96,7 +98,8 @@
 		<div class="page_next">
 			<c:choose>
 				<c:when test="${existNext }">
-					<a href="index?pageNo=${last + 1}&upkind=${upkindStatus}&upr_cd=${upr_cdStatus}">
+					<a href="index?pageNo=${last + 1}&upkind=${upkindStatus}
+					&upr_cd=${upr_cdStatus}&bgnde=${bgndeStatus}&endde=${enddeStatus}">
 					<i style="color: black" class="fa-solid fa-angle-right"></i></a>
 				</c:when>
 				<c:otherwise>

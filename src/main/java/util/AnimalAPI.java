@@ -11,10 +11,17 @@ import java.util.Map;
 
 import com.google.gson.Gson;
 
+import data.animal.AnimalItem;
 import data.animal.AnimalResponse;
 import data.animal.AnimalResponseResult;
 
 public class AnimalAPI {
+	
+	private static Map<String, AnimalItem> cache;
+	static {
+		cache = new HashMap<>();
+	}
+	
 	
 	// OPEN API 연동해서 데이터 받아와서 파싱해서 컨트롤러로 이동
 	public synchronized static AnimalResponse getAnimals(String upkind, String upr_cd, String pageNo, 
@@ -61,10 +68,20 @@ public class AnimalAPI {
 			Gson gson = new Gson();
 			AnimalResponseResult result = gson.fromJson(resp.body(), AnimalResponseResult.class);
 			
+			for(AnimalItem one : result.getResponse().getBody().getItems().getItem()) {
+				cache.put(one.getDesertionNo(), one);
+			}
+			
 			return result.getResponse();
 		}catch(Exception e) {
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	public static AnimalItem findByDesertionNo(String no) {
+		
+		
+		return cache.get(no);
 	}
 }
