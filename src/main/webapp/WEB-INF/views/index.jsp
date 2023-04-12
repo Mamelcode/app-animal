@@ -61,6 +61,8 @@
 	<c:set var="upr_cdStatus" value="${empty param.upr_cd ? null : param.upr_cd }" />
 	<c:set var="upkindStatus" value="${empty param.upkind ? null : param.upkind }" />
 	<c:set var="currentPage" value="${empty param.pageNo ? 1: param.pageNo }"/>
+	<c:set var="bgndeStatus" value="${empty param.bgnde ? null : param.bgnde }"/>
+	<c:set var="bgndeStatus" value="${empty param.bgnde ? null : param.bgnde }"/>
 	
 	<%-- prev 처리 --%>
 	<div class="page">
