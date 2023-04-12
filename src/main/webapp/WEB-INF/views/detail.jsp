@@ -49,36 +49,44 @@
 				</div>
 				<div class="detail_box">
 					<ul>
-						<li><span>품 종 :</span>${item.kindCd}</li>
-						<li><span>성 별 :</span>${item.sexCd }</li>
-						<li><span>나 이 :</span>${item.age }</li>
-						<li><span>체 중 :</span>${item.weight }</li>
-						<li><span>관할기간 :</span>${item.orgNm}</li> 
-						<li><span>발견장소 :</span>${item.happenPlace}</li>
-						<li><span>발견날짜 :</span>${item.happenDt}</li>
+						<li><span>품 종 </span>: ${item.kindCd}</li>
+						<li><span>성 별 </span>: ${item.sexCd }</li>
+						<li><span>나 이 </span>: ${item.age }</li>
+						<li><span>체 중 </span>: ${item.weight }</li>
+						<li><span>관할기관 </span>: ${item.orgNm}</li> 
+						<li><span>발견장소 </span>: ${item.happenPlace}</li>
+						<li><span>발견날짜 </span>: ${item.happenDt}</li>
 					</ul>
 				</div>
 			</div>
 			
 			<%-- 댓글영역 --%>
 			<div class="detail_comment">
+				<h2><i class="fa-solid fa-heart"></i>응원의 한마디 (${fn:length(messages)} 건)</h2>
 				<div>
 					<form action="/message" method="post">
 						<input type="hidden" name="target" value="${item.desertionNo}">
 						
-						<textarea name="body" placeholder="응원을 작성하세요."></textarea>
+						<textarea name="body" placeholder="응원을 작성하세요."  rows="8" cols="80"></textarea>
 						
-						<input type="password" name="pass" placeholder="비밀번호"/>
-						
-						<button type="submit">작성</button>
+						<div>
+							<input type="password" name="pass" placeholder="비밀번호를 입력하세요. (필수)" required="required"/>
+							<button type="submit">응원하기</button>
+						</div>
 					</form>
 				</div>
-				<h2>응원의 한마디 (${fn:length(messages)} 건)</h2>
+				
 				<c:forEach items="${messages}" var="msg">
-					<div>
-						<h4>${msg.body}</h4>
+					<div class="comment_text">
+						<div>
+							<h4>${msg.body}</h4>
+						</div>
+						<div>
+							<a href=""><i class="fa-regular fa-xmark"></i></a>
+						</div>
 					</div>
 				</c:forEach>
+				
 			</div>
 			<%-- 댓글영역 끝! --%>
 		</div>

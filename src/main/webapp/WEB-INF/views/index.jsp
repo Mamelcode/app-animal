@@ -48,7 +48,14 @@
 						<img src="${one.filename}">
 					</div>
 					<ul>
-						<li>${one.kindCd}</li>
+						<c:choose>
+							<c:when test="${one.sexCd eq 'M'}">
+								<li><span>${one.kindCd}</span><i class="fa-solid fa-mars"></i></li>
+							</c:when>
+							<c:otherwise>
+								<li><span>${one.kindCd}</span><i class="fa-solid fa-venus"></i></li>
+							</c:otherwise>
+						</c:choose>
 						<li>관할기관 : ${one.orgNm}</li> 
 						<li>발견장소 : ${one.happenPlace}</li>
 						<li>발견날짜 : ${one.happenDt}</li>
