@@ -25,6 +25,16 @@ public class IndexController extends HttpServlet {
 		// 축종코드 : 개 ==> "417000", 고양이 ==> "422400", 기타 ==> "429900"
 		String upkind = req.getParameter("upkind");
 		String upr_cd = req.getParameter("upr_cd");
+		String bgnde = req.getParameter("bgnde");
+		String endde = req.getParameter("endde");
+		
+		if(bgnde != null && bgnde.matches("\\d{4}-\\d{2}-\\d{2}")) {
+			bgnde = bgnde.replaceAll("-", "");
+		}
+		
+		if(endde != null && endde.matches("\\d{4}-\\d{2}-\\d{2}")) {
+			endde = endde.replaceAll("-", "");
+		}
 		
 		int p;
 		if(req.getParameter("pageNo") == null) {
@@ -33,8 +43,8 @@ public class IndexController extends HttpServlet {
 			p = Integer.parseInt(req.getParameter("pageNo"));
 		}
 		
-		String pageNo = p + ""; 
-		AnimalResponse animal = AnimalAPI.getAnimals(upkind, upr_cd, pageNo);
+		String pageNo = p + "";
+		AnimalResponse animal = AnimalAPI.getAnimals(upkind, upr_cd, pageNo, bgnde, endde);
 		
 		if(animal != null) {
 			req.setAttribute("datas", animal.getBody().getItems().getItem());

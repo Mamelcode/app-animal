@@ -16,9 +16,12 @@
 <body>
 	<div>
 		<div class="title">
-			<a href="/index"><i class="fa-thin fa-dog-leashed"></i>산책</a>
+			<a href="/index"><i class="fa-light fa-shield-dog"></i>보듬</a>
 			<div>
-				<form action="/index">
+				<form action="/index" method="get">
+					<input class="input_date" type="date" name="bgnde" value="${param.bgnde eq null ? '' : param.bgnde}"/> 
+					<span style="color: white;margin: 0px 5px; font-size: 20px;">~</span> 
+					<input class="input_date" type="date" name="endde" value="${param.endde eq null ? '' : param.endde}"/>
 					<select name="upr_cd">
 						<option value="">전국</option>
 						<c:forEach items="${city}" var="one">
@@ -48,6 +51,7 @@
 						<li>${one.kindCd}</li>
 						<li>관할기관 : ${one.orgNm}</li> 
 						<li>발견장소 : ${one.happenPlace}</li>
+						<li>발견날짜 : ${one.happenDt}</li>
 					</ul>
 				</div>
 		</c:forEach>

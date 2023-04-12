@@ -5,6 +5,8 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.google.gson.Gson;
 
@@ -16,9 +18,16 @@ public class SidoAPI {
 		public synchronized static SidoResponse getSido() {
 			try {
 				String target = "http://apis.data.go.kr/1543061/abandonmentPublicSrvc/sido";
-				String queryString= "?serviceKey=IW2U%2FqUpMRhESj1g0MEVFRu%2BSXW5ysrBX%2FBASDOXsa%2FU8uzSE%2B5%2FWqzS3J30O5DcSJPTw0E%2FaykJb9cwz5eyww%3D%3D&_type=json";
+				//String queryString= "?serviceKey=IW2U%2FqUpMRhESj1g0MEVFRu%2BSXW5ysrBX%2FBASDOXsa%2FU8uzSE%2B5%2FWqzS3J30O5DcSJPTw0E%2FaykJb9cwz5eyww%3D%3D&_type=json";
 				
-				URI uri = new URI(target+queryString);
+				Map<String, String> params = new HashMap<>();
+				params.put("serviceKey", "IW2U%2FqUpMRhESj1g0MEVFRu%2BSXW5ysrBX%2FBASDOXsa%2FU8uzSE%2B5%2FWqzS3J30O5DcSJPTw0E%2FaykJb9cwz5eyww%3D%3D");
+				params.put("_type", "json");
+				params.put("numOfRows", "17");
+				
+				String queryString = QueryStringBuilder.build(params);
+				
+				URI uri = new URI(target+ "?" +queryString);
 				
 				// HttpRequest 객체를 활용하는 방식
 				HttpClient client = HttpClient.newHttpClient();
