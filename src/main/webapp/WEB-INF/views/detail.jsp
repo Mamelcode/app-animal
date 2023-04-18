@@ -54,13 +54,43 @@
 						<li><span>나 이 </span>: ${item.age }</li>
 						<li><span>체 중 </span>: ${item.weight }</li>
 						<li><span>관할기관 </span>: ${item.orgNm}</li> 
-						<li><span>발견장소 </span>: ${item.happenPlace}</li>
 						<li><span>발견날짜 </span>: ${item.happenDt}</li>
+						<li><span>발견장소 </span>: ${item.happenPlace}</li>
 					</ul>
 				</div>
+				<c:choose>
+					<c:when test="${doc.lng != null}">
+						<div id="map" style="width:500px;height:400px; margin-bottom: 10px; "></div>
+						<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?
+						appkey=	f11424bc80cb6f3ec465b99e25073db7"></script>
+						<script>
+							let mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+						    mapOption = { 
+						        center: new kakao.maps.LatLng(${doc.lng}, ${doc.lat}), // 지도의 중심좌표
+						        level: 3 // 지도의 확대 레벨
+						    };
+			
+							let map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+				
+							// 마커가 표시될 위치입니다 
+							let markerPosition  = new kakao.maps.LatLng(${doc.lng}, ${doc.lat}); 
+				
+							// 마커를 생성합니다
+							let marker = new kakao.maps.Marker({
+							    position: markerPosition
+							});
+				
+							// 마커가 지도 위에 표시되도록 설정합니다
+							marker.setMap(map);
+						</script>
+					</c:when>
+					<c:otherwise>
+						<h3 style="color: red; margin-bottom: 20px; ">지도 정보가 존재하지 않습니다.</h3>
+					</c:otherwise>
+				</c:choose>
 			</div>
 			
-			<%-- 댓글영역 --%>
+			<%-- 응원영역 --%>
 			<div class="detail_comment">
 				<h2><i class="fa-solid fa-heart"></i>응원의 한마디 (${fn:length(messages)} 건)</h2>
 				<div>
@@ -88,7 +118,7 @@
 				</c:forEach>
 				
 			</div>
-			<%-- 댓글영역 끝! --%>
+			<%-- 응원영역 끝! --%>
 		</div>
 		<%-- 상세보기 끝! --%>
 		
