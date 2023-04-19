@@ -30,10 +30,8 @@ public class ChartController extends HttpServlet {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		String[] de = new String[5];
 		for (int i = 0; i < 5; i++) {
-			System.out.println(4-i);
 			de[4-i] = sdf.format(new Date(System.currentTimeMillis() - 1000 * 60 * 60 * 24 * i));
 		}
-		System.out.println(Arrays.toString(de));
 		req.setAttribute("date", de);
 		// ========================
 		

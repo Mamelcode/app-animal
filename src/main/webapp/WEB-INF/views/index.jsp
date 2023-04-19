@@ -64,7 +64,7 @@
 		</c:forEach>
 		</div>
 	</div>
-	<%-- 페이지 처리 --%>
+	<%-- 페이지 파라미터 처리 --%>
 	<c:set var="upr_cdStatus" value="${empty param.upr_cd ? null : param.upr_cd }" />
 	<c:set var="upkindStatus" value="${empty param.upkind ? null : param.upkind }" />
 	<c:set var="currentPage" value="${empty param.pageNo ? 1: param.pageNo }"/>
